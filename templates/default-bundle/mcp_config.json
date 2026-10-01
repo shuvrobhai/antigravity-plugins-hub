@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "example-plugin_helper": {
+      "command": "node",
+      "args": ["servers/helper.js"],
+      "env": {}
+    }
+  }
+}

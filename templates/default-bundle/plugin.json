@@ -1,0 +1,13 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "example-plugin",
+  "displayName": "Example Plugin",
+  "description": "Canonical blueprint plugin bundle demonstrating skills, agents, rules, and MCP servers.",
+  "version": "0.1.0",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Run example plugin audit",
+    "Inspect bundle configuration",
+    "Demonstrate reviewer subagent"
+  ]
+}
