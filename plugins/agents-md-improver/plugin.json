@@ -1,0 +1,12 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "agents-md-improver",
+  "displayName": "AGENTS.md Improver",
+  "description": "Tools to maintain and improve AGENTS.md files, audit quality, capture session learning, and keep project memory current.",
+  "version": "1.0.0",
+  "suggestedPrompts": [
+    "Audit current AGENTS.md against codebase",
+    "Revise AGENTS.md with session learnings",
+    "Evaluate AGENTS.md quality score"
+  ]
+}
