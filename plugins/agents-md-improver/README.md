@@ -21,19 +21,17 @@ The `agents-md-improver` plugin provides two complementary tools for different s
 plugins/agents-md-improver/
 ├── plugin.json                              # Official plugin manifest
 ├── README.md                                # Plugin documentation
-├── docs/                                    # Design specifications and documentation
-│   └── revise-spec.md                       # Specification for session reflection
 └── skills/
     ├── audit/                               # Codebase alignment & audit skill
     │   ├── SKILL.md                         # Main operational instructions
     │   └── reference/
-    │       ├── quality-criteria.md          # 5-pillar rubric for AGENTS.md quality
-    │       ├── templates.md                 # Canonical modular AGENTS.md templates
+    │       ├── quality-criteria.md          # 6-criterion rubric for AGENTS.md quality
+    │       ├── templates.md                 # Canonical templates: packages, monorepos, modular rules
     │       └── update-guidelines.md         # Drift remediation & surgical editing rules
     └── revise/                              # Session reflection & learning capture skill
         ├── SKILL.md                         # Main operational instructions
         └── reference/
-            └── session-extraction.md        # Taxonomy for extracting tacit knowledge
+            └── session-extraction.md        # Session evidence collection & routing
 ```
 
 ---
