@@ -19,6 +19,24 @@ Review this session for learnings about working with Antigravity in this codebas
 
 ---
 
+## Relationship to the Built-in `/learn`
+
+Antigravity ships a built-in `/learn` command that distills session corrections into persistent **rules** or a new **skill**. The two are complementary, not alternatives:
+
+| | `/learn` (built-in) | `revise` (this skill) |
+| :--- | :--- | :--- |
+| **Output target** | `.antigravity/rules.md`, or a new `SKILL.md` | `AGENTS.md` — project context |
+| **Best for** | Constraints, invariants, reusable procedures | Commands, architecture, gotchas, environment quirks |
+| **Input** | Instruction-driven: you name what to capture | Full session sweep across all signals |
+| **Routing** | Single target | Hierarchical — nearest `AGENTS.md` in a monorepo |
+| **Approval** | — | Itemised candidates, individually cherry-pickable |
+
+Choose `revise` when the learning is **project context** that every future session needs. Choose `/learn` when it is a **constraint or a procedure** better expressed as a rule or a skill.
+
+> **Upstream path conflict:** the `/learn` documentation states rules are written to `.antigravity/rules.md`, while the Rules documentation specifies `.agents/rules/*.md`. These disagree. Confirm the real location locally before relying on either.
+
+---
+
 ## Reference Guides
 
 - **Extraction Taxonomy & Rules**: [session-extraction.md](reference/session-extraction.md) — Heuristics for filtering signal from noise, parsing transcripts, and deduplicating instructions.
