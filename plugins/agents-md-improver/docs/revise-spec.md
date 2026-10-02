@@ -14,7 +14,7 @@ What context was missing that would have helped Antigravity work more effectivel
 ### Signal Sources
 - **Transcript & execution log**: Tool errors (`status == "ERROR"`), command retries.
 - **User corrections**: Pivot prompts (*"don't use"*, *"actually"*, *"use X instead"*).
-- **Workspace modifications**: `git diff` if available, or session `write_to_file`/`replace_file_content` events if in a non-git project.
+- **Workspace modifications**: `git diff` if available, or session `write_file`/`replace_file_content` events if in a non-git project.
 
 ## Step 2: Find AGENTS.md Files & Existing Rules
 

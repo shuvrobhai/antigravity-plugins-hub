@@ -49,7 +49,7 @@ Identify missing context that would have helped Antigravity work more effectivel
 2. **User Corrections**: Identify prompts containing guidance or pivots (*"actually"*, *"instead"*, *"don't use"*, *"always"*).
 3. **Workspace Changes**:
    - If in a Git repo: Inspect `git status` and `git diff` for changed files and patterns.
-   - If not in a Git repo: Inspect `write_to_file` and `replace_file_content` events recorded in the session.
+   - If not in a Git repo: Inspect `write_file` and `replace_file_content` events recorded in the session.
 
 ---
 

@@ -96,7 +96,7 @@ Collect evidence across three distinct layers during the session:
    - Look for pivot phrases: *"Actually..."*, *"Don't use X, use Y"*, *"Prefer <pattern>"*.
 3. **Workspace Modifications**:
    - In Git repos: Inspect `git status` and `git diff` for new dependencies or config keys.
-   - In Non-Git projects: Inspect `write_to_file` and `replace_file_content` events in the session.
+   - In Non-Git projects: Inspect `write_file` and `replace_file_content` events in the session.
 
 ---
 

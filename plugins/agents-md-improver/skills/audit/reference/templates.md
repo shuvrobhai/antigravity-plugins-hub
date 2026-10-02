@@ -242,3 +242,56 @@ For multi-package repositories (Nx, Turborepo, pnpm workspaces, Cargo workspaces
 - <generation / sync pattern>
 - Never cross-import internal files directly across package boundaries.
 ```
+---
+
+## Template: Modular Rule (`.agents/rules/<rule-name>.md`)
+
+Offload target for domain-specific content extracted from `AGENTS.md`. Rules load **independently** of `AGENTS.md` and may activate conditionally.
+
+> **Frontmatter is mandatory.** A file inside `rules/` that omits frontmatter, or uses an unrecognized `trigger` (such as camelCase `alwaysOn`), is **silently discarded** — no error is raised.
+
+```markdown
+---
+trigger: always_on
+description: <one line describing when this rule applies>
+---
+
+# <Rule Name>
+
+- <constraint or invariant>
+- <constraint or invariant>
+```
+
+### Choosing a `trigger`
+
+| `trigger` | Use when | Also required |
+| :--- | :--- | :--- |
+| `always_on` | Constraint applies to every task | — |
+| `model_decision` | Agent decides relevance from `description` | `description` |
+| `glob` | Only relevant to certain file types | `globs` |
+| `manual` | Only when explicitly invoked | — |
+
+### Conditional rule example
+
+```markdown
+---
+trigger: glob
+globs: "*.ts, *.tsx"
+description: TypeScript conventions for this project
+---
+
+# TypeScript Conventions
+
+- No `any`; use `unknown` and narrow before use.
+- Prefer `type` for unions, `interface` for extensible objects.
+```
+
+### Offloading from `AGENTS.md`
+
+When `AGENTS.md` grows past ~150–200 lines, move cohesive, domain-specific sections here and leave a one-line summary behind.
+
+- One rule per file, named for its topic (`typescript.md`, `testing.md`, `deploy.md`).
+- Keep project-wide invariants in `AGENTS.md`; put domain detail in rules.
+- Nested paths (`.agents/rules/frontend/react.md`) are **ignored** unless registered in `.agents/rules.json`.
+- 24 KB per-file ceiling; 20,000-token aggregate budget across global and `always_on` rules.
+- Do **not** name a rule file `AGENTS.md` — that type takes no frontmatter and is always active.
