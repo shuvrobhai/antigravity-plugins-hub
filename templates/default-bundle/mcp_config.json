@@ -1,4 +1,5 @@
 {
+  "$schema": "https://antigravity.google/schemas/v1/mcp_config.json",
   "mcpServers": {
     "example-plugin_helper": {
       "command": "node",
