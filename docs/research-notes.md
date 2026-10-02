@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-The specifications documented in [`README.md`](file:///Users/rayhanislamshuvro/Developer/antigravity/antigravity-plugins-hub/README.md) accurately capture core concepts of Google Antigravity and the **Agent Plugins 1.0** standard. However, several critical runtime semantics, Gotchas, and lifecycle behaviors exposed by the Antigravity engine were identified and must be integrated into repository documentation and template designs.
+The specifications documented in [`README.md`](../README.md) accurately capture core concepts of Google Antigravity and the **Agent Plugins 1.0** standard. However, several critical runtime semantics, Gotchas, and lifecycle behaviors exposed by the Antigravity engine were identified and must be integrated into repository documentation and template designs.
 
 Key operational findings include:
 1. **`dir` vs. `name` Discrepancy:** The runtime engine keys all operations (enabling, disabling, uninstalling, deep-links) on the install directory name (`dir`), not the manifest `name`.
