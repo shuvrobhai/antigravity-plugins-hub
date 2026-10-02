@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: Example always-on rule for this plugin bundle. Replace with real constraints.
+---
+
 # Example Plugin Rules
 
 Behavioral guidelines and operating constraints for this plugin bundle. These rules are active whenever the plugin is enabled.

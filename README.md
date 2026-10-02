@@ -11,7 +11,6 @@ This hub houses agent configuration assets—including custom subagents, reusabl
 ```text
 antigravity-hub/
 ├── README.md                    # Project overview and authoring guide
-├── catalog.json                 # Global plugin registry and version index
 │
 ├── docs/                        # Curated raw Markdown official documentation & research mirrors
 │   ├── research-notes.md        # Comprehensive web & runtime engine verification report
@@ -126,11 +125,13 @@ You are an expert security auditor and code reviewer. Inspect source code for vu
 
 ---
 
-### 3. Behavioral Rules (`rules/AGENTS.md`)
+### 3. Behavioral Rules (`rules/<rule-name>.md`)
 
-* Behavioral constraints and coding style guidelines must be placed in `rules/AGENTS.md`.
-* **No YAML Frontmatter:** Rules files must be written in raw Markdown. Adding YAML frontmatter headers to `AGENTS.md` breaks parsing.
-* **Persistent Scope:** Rules inside an enabled plugin are automatically treated as `always_on`.
+* Behavioral constraints and coding style guidelines must be placed in `rules/<rule-name>.md`.
+* **YAML frontmatter is MANDATORY.** Every `.md` file inside `rules/` must declare a valid `trigger`: `always_on`, `model_decision`, `glob`, or `manual`. A rule file that omits frontmatter, or uses an unrecognized value (e.g. camelCase `alwaysOn`), is **silently discarded** — no error is raised.
+* **`globs`** is required when `trigger: glob`. **`description`** is required when `trigger: model_decision`.
+* **Do not name a rule file `AGENTS.md`.** `AGENTS.md` is a separate type: it takes **no** frontmatter and is always active for its directory scope. Naming a rule file `rules/AGENTS.md` conflates the two and it will be discarded.
+* **Persistent Scope:** Rules packaged inside an enabled plugin activate automatically.
 
 ---
 
@@ -195,7 +196,7 @@ cp -r templates/default-bundle plugins/my-plugin
 ### Step 2: Configure Manifest and Components
 1. Update `plugins/my-plugin/plugin.json` with a unique identifier.
 2. Configure agent personas in `agents/*.md` and skills in `skills/<skill-name>/SKILL.md`.
-3. Add behavioral instructions in `rules/AGENTS.md`.
+3. Add behavioral instructions in `rules/<rule-name>.md` (YAML frontmatter with a valid `trigger` is required).
 4. (Optional) Define tool integrations in `mcp_config.json`, hooks in `hooks.json`, or a square logo in `assets/logo.svg`.
 
 ### Step 3: Local Activation and Testing
@@ -218,19 +219,7 @@ agy plugin install ./plugins/my-plugin
 
 > **Note:** A newly created or symlinked plugin directory requires an application or session restart for initial discovery. Subsequent enable/disable toggles apply live immediately.
 
-### Step 4: Register in `catalog.json`
-Add an entry for the plugin to the central catalog:
-
-```json
-{
-  "id": "my-plugin",
-  "name": "my-plugin",
-  "version": "1.0.0",
-  "path": "plugins/my-plugin",
-  "skills": ["example-skill"],
-  "agents": ["reviewer"]
-}
-```
+> **Install target:** `agy plugin install ./plugins/my-plugin` stages the plugin into the **shared global config folder** (`~/.gemini/config/plugins/`). Official docs claim `~/.gemini/antigravity-cli/plugins/`, but observed behaviour contradicts this.
 
 ---
 

@@ -54,7 +54,7 @@ plugins/<plugin-id>/
 ├── assets/logo.svg                # Square icon (>=128x128)
 ├── skills/<skill-name>/SKILL.md   # Agent skills (instructions with YAML frontmatter)
 ├── agents/<agent-name>.md         # Subagents (system prompt with YAML frontmatter)
-├── rules/AGENTS.md                # Persistent rules (plain Markdown, NO frontmatter)
+├── rules/<rule-name>.md           # Behavioral rules (YAML frontmatter REQUIRED)
 └── sidecars/<sidecar>/sidecar.json# Native background daemon processes
 ```
 
@@ -81,12 +81,16 @@ plugins/<plugin-id>/
 
 ---
 
-## 4. Behavioral Rules (`rules/AGENTS.md`)
+## 4. Behavioral Rules (`rules/<rule-name>.md`)
 
 ### Claims Verified
-* **File Convention:** Behavioral constraints in plugins reside at `rules/AGENTS.md`.
-* **Frontmatter Constraint:** Rules files in `rules/AGENTS.md` and workspace `AGENTS.md` **must NOT** contain YAML frontmatter. Adding YAML headers causes parsing errors or treats the header as literal prompt text.
-* **Activation Mode:** Rules defined in `rules/AGENTS.md` are active whenever the plugin is enabled (`always_on`). Modular rules under `.agents/rules/*.md` require YAML frontmatter to toggle `activation: always_on | model_decision | manual`.
+* **File Convention:** Behavioral constraints in plugins reside at `rules/<rule-name>.md`.
+* **Frontmatter Requirement (CORRECTED):** Two distinct file types with opposite rules:
+  * `AGENTS.md` / `GEMINI.md` — **no** YAML frontmatter. Entire content is plain Markdown, always active for its directory scope.
+  * `rules/*.md` — frontmatter is **mandatory**, declaring a valid `trigger`.
+* **Silent Discard:** A `rules/*.md` file that omits frontmatter, or uses an unrecognized `trigger` value (such as camelCase `alwaysOn`), is **silently discarded** with no error.
+* **Activation Key (CORRECTED):** The key is **`trigger`**, not `activation`. Valid values: `always_on`, `model_decision`, `glob`, `manual`. Requires `globs` when `glob`; requires `description` when `model_decision`.
+* **Size Limits:** 24 KB per-file truncation ceiling; 20,000-token aggregate budget for global + `always_on` rules (oversized files auto-demoted to pointers).
 
 ---
 
@@ -129,7 +133,7 @@ plugins/<plugin-id>/
 | **`plugin.json` Schema** | `$schema`, `name`, `suggestedPrompts` | Supports JSONC, optional name, 128x128 logo, max 3 prompts | **Enhanced with JSONC & Logo specs** |
 | **Component Layout** | `skills`, `agents`, `rules`, `mcp` | Added `sidecars/`, `hooks.json`, and human-only `README.md` | **Updated to include full anatomy** |
 | **Subagent Frontmatter** | `mainAgent`, `subagent`, `commandExecutionPolicy` | Antigravity Agent Spec (`antigravity.google`) | **Verified** |
-| **`rules/AGENTS.md`** | Raw Markdown only, no YAML headers | Antigravity Rules Parsing Architecture | **Verified** |
+| **`rules/<rule-name>.md`** | Raw Markdown only, no YAML headers | **CORRECTED** — frontmatter is mandatory in `rules/`; key is `trigger`, not `activation` | **Fixed: silent-discard risk** |
 | **`mcp_config.json`** | Namespacing requirement, plugin root location | Antigravity MCP Integration Guidelines | **Verified** |
 | **Identifier Gotcha** | Stated `name` used in catalog | Identified that runtime engine keys on `dir` | **Crucial update for tooling/docs** |
 | **Restart Behavior** | Stated restart needed for all | Restart only needed for new directories; live toggle for enable/disable | **Clarified in notes** |

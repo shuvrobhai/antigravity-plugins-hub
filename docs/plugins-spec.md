@@ -18,7 +18,7 @@ An Antigravity plugin is an isolated directory containing declarative agent conf
 │   └── logo.svg                   # Optional square icon (>=128x128)
 ├── skills/<skill-name>/SKILL.md   # Agent skills (instructions with YAML frontmatter)
 ├── agents/<agent-name>.md         # Custom subagents (YAML frontmatter + persona prompt)
-├── rules/AGENTS.md                # Persistent rules (plain Markdown, no frontmatter)
+├── rules/<rule-name>.md           # Behavioral rules (YAML frontmatter required)
 └── sidecars/<sidecar>/sidecar.json# Native background daemon processes
 ```
 
